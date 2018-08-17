@@ -1,9 +1,23 @@
 <template>
   <div id="app">
-    <Clock />
-    <HomeScore />
-    <Period />
-    <AwayScore />
+    <div class="container">
+      <div class="clock-container">
+        <Clock />
+      </div>
+
+      <div class="home-score-container">
+        <HomeScore />
+      </div>
+
+      <div class="away-score-container">
+        <AwayScore />
+      </div>
+
+      <div class="period-container">
+        <Period />
+      </div>
+
+    </div>
   </div>
 </template>
 
@@ -39,9 +53,56 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  margin-top: 60px;
 }
 
+/* Layout grid */
+.container {
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "left  top   right"
+    "left bottom right";
+}
+.clock-container {
+  grid-area: top;
+  margin-top: 5%;
+}
+.home-score-container {
+  grid-area: left;
+  margin-top: 15%;
+}
+.away-score-container {
+  grid-area: right;
+  margin-top: 15%;
+}
+.period-container {
+  grid-area: bottom;
+}
+
+/* Fixed aspect ratio based on either width or height of the viewport */
+.container {
+  width: 100vw;
+  height: calc(100vw * 9/16);
+  font-size: calc(100vw * 9/16);
+  margin: 0 auto;
+
+}
+@media (min-aspect-ratio: 16/9) {
+  .container {
+    width: calc(100vh * 16/9);
+    height: 100vh;
+    font-size: 100vh;
+  }
+}
+/* Use em font sizes to scale them with container */
+.container h1 { font-size: .1em; margin: .1em 0; }
+.container h2 { font-size: .08em; margin: .1em 0; }
+.container h3 { font-size: .07em; margin: .1em 0; }
+.container h4 { font-size: .06em; margin: .1em 0; }
+.container h5 { font-size: .05em; margin: .1em 0; }
+
+/* 7 segment LCD font */
 @font-face {
   font-family: 'DSEG7ClassicMini';
   src: url('/fonts/DSEG7ClassicMini-Bold.woff2') format('woff2'),

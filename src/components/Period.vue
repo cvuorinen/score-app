@@ -1,6 +1,7 @@
 <template>
   <div class="period" @click="increment">
-    <span class="lcd">{{ this.$store.state.period }}</span>
+    <h5 contenteditable="true">ERÄ</h5>
+    <div class="lcd">{{ this.$store.state.period }}</div>
   </div>
 </template>
 
@@ -18,10 +19,9 @@ export default class Period extends Vue {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.period {
-  font-size: 30px;
+.period .lcd {
+  font-size: 0.1em;
   color: greenyellow;
 }
 </style>

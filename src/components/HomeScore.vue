@@ -1,15 +1,16 @@
 <template>
-  <div class="score" @click="increment">
-    <Digits v-bind:value="this.$store.state.score.home" />
+  <div>
+    <h3 contenteditable="true">KOTI</h3>
+    <Score :value="this.$store.state.score.home" @increment="increment" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import Digits from './Digits.vue';
+import Score from './Score.vue';
 
 @Component({
-  components: { Digits },
+  components: { Score },
 })
 export default class HomeScore extends Vue {
   increment () {
@@ -17,10 +18,3 @@ export default class HomeScore extends Vue {
   }
 }
 </script>
-
-<style scoped>
-.score {
-  font-size: 60px;
-  color: orange;
-}
-</style>

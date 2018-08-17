@@ -22,10 +22,11 @@ export default class Clock extends Vue {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .clock {
-  font-size: 40px;
+  border: 2px solid white;
+  padding: .1em;
+  font-size: 0.18em;
   color: red;
 }
 </style>
