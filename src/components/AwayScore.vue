@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <h3 contenteditable="true">VIERAS</h3>
-    <Score :value="this.$store.state.score.away" @increment="increment" />
+  <div v-shortkey="keyMap"
+       @shortkey="keyAction">
+    <h3 contenteditable="true" spellcheck="false">
+      AWAY
+    </h3>
+    <Score :value="this.$store.state.score.away"
+           @increment="increment" />
   </div>
 </template>
 
@@ -15,6 +19,19 @@ import Score from './Score.vue';
 export default class AwayScore extends Vue {
   increment () {
     this.$store.commit('incrementAway')
+  }
+  decrement () {
+    this.$store.commit('decrementAway')
+  }
+
+  keyMap = { increment: ['arrowup'], decrement: ['arrowdown'] }
+  keyAction (event: { srcKey: string }) {
+    switch (event.srcKey) {
+      case 'increment':
+        return this.increment()
+      case 'decrement':
+        return this.decrement()
+    }
   }
 }
 </script>

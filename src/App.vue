@@ -78,6 +78,7 @@ body {
 }
 .period-container {
   grid-area: bottom;
+  margin-top: 5%;
 }
 
 /* Fixed aspect ratio based on either width or height of the viewport */

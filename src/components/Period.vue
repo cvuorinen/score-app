@@ -1,7 +1,13 @@
 <template>
-  <div class="period" @click="increment">
-    <h5 contenteditable="true">ERÄ</h5>
-    <div class="lcd">{{ this.$store.state.period }}</div>
+  <div class="period"
+       v-shortkey="keyMap"
+       @shortkey="keyAction">
+    <h5 contenteditable="true">
+      PERIOD
+    </h5>
+    <div class="lcd" @click="increment">
+      {{ this.$store.state.period }}
+    </div>
   </div>
 </template>
 
@@ -15,6 +21,19 @@ import Digits from './Digits.vue';
 export default class Period extends Vue {
   increment () {
     this.$store.commit('incrementPeriod')
+  }
+  decrement () {
+    this.$store.commit('decrementPeriod')
+  }
+
+  keyMap = { increment: ['pageup'], decrement: ['pagedown'] }
+  keyAction (event: { srcKey: string }) {
+    switch (event.srcKey) {
+      case 'increment':
+        return this.increment()
+      case 'decrement':
+        return this.decrement()
+    }
   }
 }
 </script>

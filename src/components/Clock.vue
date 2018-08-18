@@ -1,6 +1,11 @@
 <template>
-  <div class="clock lcd" @click="toggle">
-    <Digits v-bind:value="this.$store.getters.minutes" />:<Digits v-bind:value="this.$store.getters.seconds" />
+  <div class="clock lcd"
+       v-bind:class="{ active: this.$store.state.clock.running }"
+       v-shortkey="{ toggle1: ['space'], toggle2: ['enter'] }"
+       @shortkey="toggle()"
+       @click="toggle">
+    <Digits v-bind:value="this.$store.getters.minutes"
+    />:<Digits v-bind:value="this.$store.getters.seconds" />
   </div>
 </template>
 
@@ -24,9 +29,13 @@ export default class Clock extends Vue {
 
 <style scoped>
 .clock {
-  border: 2px solid white;
+  border: .03em solid #aaa;
+  border-radius: 0.06em;
   padding: .1em;
   font-size: 0.18em;
   color: red;
+}
+.clock.active {
+  border-color: #a00;
 }
 </style>

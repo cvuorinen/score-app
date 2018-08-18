@@ -45,8 +45,11 @@ export default new Vuex.Store<State>({
   },
   mutations: {
     incrementHome: (state) => state.score.home++,
+    decrementHome: (state) => state.score.home && state.score.home--,
     incrementAway: (state) => state.score.away++,
+    decrementAway: (state) => state.score.away && state.score.away--,
     incrementPeriod: (state) => state.period++,
+    decrementPeriod: (state) => state.period && state.period--,
     setClock: (state, running: boolean) => state.clock.running = running,
     setTime: (state, time: number) => state.clock.time = time,
   },
