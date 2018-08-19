@@ -5,7 +5,8 @@
       AWAY
     </h3>
     <Score :value="this.$store.state.score.away"
-           @increment="increment" />
+           @increment="increment"
+           @decrement="decrement" />
   </div>
 </template>
 

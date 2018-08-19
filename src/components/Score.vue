@@ -1,10 +1,11 @@
 <template>
-  <div class="score" @click="increment">
+  <div class="score" @click="onClick($event)">
     <Digits v-bind:value="value" />
   </div>
 </template>
 
 <script lang="ts">
+import { VNode } from 'vue'
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Digits from './Digits.vue';
 
@@ -13,8 +14,12 @@ import Digits from './Digits.vue';
   props: { value: Number }
 })
 export default class Score extends Vue {
-  increment () {
-    this.$emit('increment')
+  onClick (event: MouseEvent) {
+    if (event.ctrlKey) {
+      this.$emit('decrement')
+    } else {
+      this.$emit('increment')
+    }
   }
 }
 </script>

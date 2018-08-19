@@ -5,7 +5,7 @@
     <h5 contenteditable="true">
       PERIOD
     </h5>
-    <div class="lcd" @click="increment">
+    <div class="lcd" @click="onClick($event)">
       {{ this.$store.state.period }}
     </div>
   </div>
@@ -19,6 +19,14 @@ import Digits from './Digits.vue';
   components: { Digits },
 })
 export default class Period extends Vue {
+  onClick (event: MouseEvent) {
+    if (event.ctrlKey) {
+      this.decrement()
+    } else {
+      this.increment()
+    }
+  }
+
   increment () {
     this.$store.commit('incrementPeriod')
   }

@@ -5,7 +5,8 @@
       HOME
     </h3>
     <Score :value="this.$store.state.score.home"
-           @increment="increment" />
+           @increment="increment"
+           @decrement="decrement" />
   </div>
 </template>
 
