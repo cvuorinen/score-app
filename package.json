@@ -13,7 +13,8 @@
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
     "vue-shortkey": "^3.1.6",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-persist": "^1.4.3"
   },
   "devDependencies": {
     "@types/chai": "^4.1.0",

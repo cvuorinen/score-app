@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersistence from 'vuex-persist'
 
 Vue.use(Vuex)
 
@@ -37,7 +38,12 @@ const defaultState = {
 
 let intervalID: any;
 
+const vuexLocal = new VuexPersistence({
+  storage: window.sessionStorage
+})
+
 export default new Vuex.Store<State>({
+  plugins: [vuexLocal.plugin],
   state: defaultState,
   getters: {
     minutes: state => Math.floor(state.clock.time / 60),
