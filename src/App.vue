@@ -1,8 +1,15 @@
 <template>
   <div id="app">
     <div class="container">
+
       <div class="clock-container">
         <Clock />
+
+        <div class="middle-container">
+          <HomePossession />
+          <Period />
+          <AwayPossession />
+        </div>
       </div>
 
       <div class="home-score-container">
@@ -11,10 +18,6 @@
 
       <div class="away-score-container">
         <AwayScore />
-      </div>
-
-      <div class="period-container">
-        <Period />
       </div>
 
     </div>
@@ -27,6 +30,8 @@ import store from './store';
 import HomeScore from './components/HomeScore.vue';
 import AwayScore from './components/AwayScore.vue';
 import Clock from './components/Clock.vue';
+import HomePossession from './components/HomePossession.vue';
+import AwayPossession from './components/AwayPossession.vue';
 import Period from './components/Period.vue';
 
 @Component({
@@ -35,6 +40,8 @@ import Period from './components/Period.vue';
     HomeScore,
     AwayScore,
     Clock,
+    HomePossession,
+    AwayPossession,
     Period
   },
 })
@@ -53,6 +60,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+.clickable {
+  cursor: pointer;
 }
 
 /* Layout grid */
@@ -76,9 +86,12 @@ body {
   grid-area: right;
   margin-top: 15%;
 }
-.period-container {
+.middle-container {
   grid-area: bottom;
   margin-top: 5%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 /* Fixed aspect ratio based on either width or height of the viewport */

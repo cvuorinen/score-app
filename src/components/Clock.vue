@@ -1,5 +1,5 @@
 <template>
-  <div class="clock lcd"
+  <div class="clock lcd clickable"
        v-bind:class="{ active: this.$store.state.clock.running }"
        v-shortkey="{ toggle1: ['space'], toggle2: ['enter'] }"
        @shortkey="toggle"

@@ -1,5 +1,6 @@
 <template>
-  <div class="score" @click="onClick($event)">
+  <div class="score clickable"
+       @click="onClick($event)">
     <Digits v-bind:value="value" />
   </div>
 </template>

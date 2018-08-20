@@ -4,10 +4,10 @@ import VuexPersistence from 'vuex-persist'
 
 Vue.use(Vuex)
 
-export enum Direction {
-  Left,
-  Right,
-  None
+export enum Possessions {
+  None,
+  Home = 'home',
+  Away = 'away',
 }
 
 export type State = {
@@ -16,20 +16,20 @@ export type State = {
     away: number;
   },
   period: number;
-  direction: Direction;
+  possession: Possessions;
   clock: {
     time: number;
     running: boolean;
   }
 }
 
-const defaultState = {
+const defaultState: State = {
   score: {
     home: 0,
     away: 0
   },
   period: 1,
-  direction: Direction.None,
+  possession: Possessions.None,
   clock: {
     time: 10*60,
     running: false
@@ -58,6 +58,7 @@ export default new Vuex.Store<State>({
     decrementPeriod: (state) => state.period && state.period--,
     setClock: (state, running: boolean) => state.clock.running = running,
     setTime: (state, time: number) => state.clock.time = time,
+    setPossession: (state, value: Possessions) => state.possession = value,
   },
   actions: {
     startClock ({ commit, dispatch }) {

@@ -5,7 +5,8 @@
     <h5 contenteditable="true">
       PERIOD
     </h5>
-    <div class="lcd" @click="onClick($event)">
+    <div class="lcd clickable"
+         @click="onClick($event)">
       {{ this.$store.state.period }}
     </div>
   </div>
