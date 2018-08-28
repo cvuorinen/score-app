@@ -20,6 +20,14 @@
         <AwayScore />
       </div>
 
+      <div class="home-fouls-container">
+        <HomeFouls />
+      </div>
+
+      <div class="away-fouls-container">
+        <AwayFouls />
+      </div>
+
       <div class="buzzer-container">
         <Buzzer />
       </div>
@@ -37,6 +45,8 @@ import Clock from './components/Clock.vue';
 import HomePossession from './components/HomePossession.vue';
 import AwayPossession from './components/AwayPossession.vue';
 import Period from './components/Period.vue';
+import HomeFouls from './components/HomeFouls.vue';
+import AwayFouls from './components/AwayFouls.vue';
 import Buzzer from './components/Buzzer.vue';
 
 @Component({
@@ -48,6 +58,8 @@ import Buzzer from './components/Buzzer.vue';
     HomePossession,
     AwayPossession,
     Period,
+    HomeFouls,
+    AwayFouls,
     Buzzer,
   },
 })
@@ -77,29 +89,36 @@ body {
   grid-template-columns: 30% 40% 30%;
   grid-template-rows: auto;
   grid-template-areas:
-    "left  top   right"
-    "left bottom right";
+    "left          top         right"
+    "bottom-left bottom bottom-right";
 }
 .clock-container {
   grid-area: top;
-  margin-top: 5%;
+  margin-top: 10%;
 }
 .home-score-container {
   grid-area: left;
-  margin-top: 15%;
+  margin-top: 30%;
 }
 .away-score-container {
   grid-area: right;
-  margin-top: 15%;
+  margin-top: 30%;
 }
 .middle-container {
-  margin-top: 10%;
+  margin-top: 20%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
+.home-fouls-container {
+  grid-area: bottom-left;
+}
+.away-fouls-container {
+  grid-area: bottom-right;
+}
 .buzzer-container {
   grid-area: bottom;
+  margin-top: 10%;
 }
 
 /* Fixed aspect ratio based on either width or height of the viewport */

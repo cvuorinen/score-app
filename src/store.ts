@@ -15,6 +15,10 @@ export type State = {
     home: number;
     away: number;
   },
+  fouls: {
+    home: number;
+    away: number;
+  },
   period: number;
   possession: Possessions;
   clock: {
@@ -23,8 +27,13 @@ export type State = {
   }
 }
 
+// TODO ablity to configure time & max fouls
 const defaultState: State = {
   score: {
+    home: 0,
+    away: 0
+  },
+  fouls: {
     home: 0,
     away: 0
   },
@@ -57,6 +66,10 @@ export default new Vuex.Store<State>({
     decrementHome: (state) => state.score.home && state.score.home--,
     incrementAway: (state) => state.score.away++,
     decrementAway: (state) => state.score.away && state.score.away--,
+    incrementHomeFouls: (state) => state.fouls.home++,
+    decrementHomeFouls: (state) => state.fouls.home && state.fouls.home--,
+    incrementAwayFouls: (state) => state.fouls.away++,
+    decrementAwayFouls: (state) => state.fouls.away && state.fouls.away--,
     incrementPeriod: (state) => state.period++,
     decrementPeriod: (state) => state.period && state.period--,
     setClock: (state, running: boolean) => state.clock.running = running,
