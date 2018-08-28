@@ -42,6 +42,9 @@ const vuexLocal = new VuexPersistence({
   storage: window.sessionStorage
 })
 
+// load audio so it's ready when needed
+const audio = new Audio('/buzzer.mp3');
+
 export default new Vuex.Store<State>({
   plugins: [vuexLocal.plugin],
   state: defaultState,
@@ -83,10 +86,14 @@ export default new Vuex.Store<State>({
 
       if (time < 0) {
         commit('setTime', 0)
+        dispatch('playBuzzer')
         return dispatch('stopClock')
       }
 
       commit('setTime', time)
+    },
+    playBuzzer() {
+      audio.play();
     }
   }
 })

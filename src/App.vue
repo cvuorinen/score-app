@@ -20,6 +20,10 @@
         <AwayScore />
       </div>
 
+      <div class="buzzer-container">
+        <Buzzer />
+      </div>
+
     </div>
   </div>
 </template>
@@ -33,6 +37,7 @@ import Clock from './components/Clock.vue';
 import HomePossession from './components/HomePossession.vue';
 import AwayPossession from './components/AwayPossession.vue';
 import Period from './components/Period.vue';
+import Buzzer from './components/Buzzer.vue';
 
 @Component({
   store,
@@ -42,7 +47,8 @@ import Period from './components/Period.vue';
     Clock,
     HomePossession,
     AwayPossession,
-    Period
+    Period,
+    Buzzer,
   },
 })
 export default class App extends Vue {}
@@ -87,11 +93,13 @@ body {
   margin-top: 15%;
 }
 .middle-container {
-  grid-area: bottom;
-  margin-top: 5%;
+  margin-top: 10%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+.buzzer-container {
+  grid-area: bottom;
 }
 
 /* Fixed aspect ratio based on either width or height of the viewport */
