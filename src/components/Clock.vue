@@ -1,13 +1,25 @@
 <template>
-  <div class="clock lcd clickable"
-       v-bind:class="{ active: this.$store.state.clock.running }"
+  <div class="clock"
+    v-bind:class="{ active: this.$store.state.clock.running }">
+    <div class="lcd clickable"
        v-shortkey="{ toggle1: ['space'], toggle2: ['enter'] }"
        @shortkey="toggle"
        @click="toggle">
-    <Digits v-bind:value="this.$store.getters.minutes"
-    /><span class="dots"
-            v-bind:class="{ blink: this.$store.state.clock.running }"
-    >:</span><Digits v-bind:value="this.$store.getters.seconds" />
+      <Digits v-bind:value="this.$store.getters.minutes"
+      /><span class="dots"
+        v-bind:class="{ blink: this.$store.state.clock.running }"
+      >:</span><Digits v-bind:value="this.$store.getters.seconds" />
+    </div>
+    <div class="buttons">
+      <button class="button"
+        @click="increment">
+        +
+      </button>
+      <button class="button"
+        @click="decrement">
+        -
+      </button>
+    </div>
   </div>
 </template>
 
@@ -25,6 +37,14 @@ export default class Clock extends Vue {
 
   toggle () {
     this.$store.dispatch('toggleClock')
+  }
+
+  increment () {
+    this.$store.dispatch('incrementClock')
+  }
+
+  decrement () {
+    this.$store.dispatch('decrementClock')
   }
 }
 </script>
@@ -45,5 +65,12 @@ export default class Clock extends Vue {
 }
 .clock.active .dots {
   color: red;
+}
+.clock .buttons {
+  font-size: 0.3em;
+}
+.clock .buttons button.button {
+  margin: 0 1em;
+  width: 5em;
 }
 </style>

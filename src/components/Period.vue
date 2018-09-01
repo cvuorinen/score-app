@@ -9,6 +9,10 @@
          @click="onClick($event)">
       {{ this.$store.state.period }}
     </div>
+    <button class="button"
+      @click="decrement">
+      -
+    </button>
   </div>
 </template>
 
@@ -51,5 +55,10 @@ export default class Period extends Vue {
 .period .lcd {
   font-size: 0.1em;
   color: greenyellow;
+}
+button.button {
+  display: block;
+  width: 2.5em;
+  margin: 0.2em auto;
 }
 </style>

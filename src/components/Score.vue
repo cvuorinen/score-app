@@ -1,7 +1,13 @@
 <template>
-  <div class="score clickable"
-       @click="onClick($event)">
-    <Digits v-bind:value="value" />
+  <div>
+    <div class="score clickable"
+        @click="onClick($event)">
+      <Digits v-bind:value="value" />
+    </div>
+    <button class="button"
+      @click="$emit('decrement')">
+      -
+    </button>
   </div>
 </template>
 
@@ -29,5 +35,10 @@ export default class Score extends Vue {
 .score {
   font-size: 0.3em;
   color: orange;
+}
+button.button {
+  display: block;
+  width: 5em;
+  margin: 0.2em auto;
 }
 </style>

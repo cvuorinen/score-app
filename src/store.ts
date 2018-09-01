@@ -105,6 +105,14 @@ export default new Vuex.Store<State>({
 
       commit('setTime', time)
     },
+    incrementClock({ getters, commit }) {
+      const time = getters.minutes + 1;
+      commit('setTime', time * 60)
+    },
+    decrementClock({ getters, commit }) {
+      const time = getters.minutes - 1;
+      commit('setTime', time * 60)
+    },
     playBuzzer() {
       audio.play();
     }

@@ -82,6 +82,17 @@ body {
 .clickable {
   cursor: pointer;
 }
+.button {
+  font-size: 1.1rem;
+  line-height: 0.7rem;
+  padding: 0 0 0 0;
+  color: gray;
+  border: .08rem solid rgba(155, 155, 155, .8);
+  border-radius: 0.1rem;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
 
 /* Layout grid */
 .container {

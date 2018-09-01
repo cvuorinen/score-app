@@ -1,8 +1,14 @@
 <template>
-  <div class="fouls lcd clickable"
-       v-bind:class="{ bonus: this.bonus }"
-       @click="onClick($event)">
-    {{ value }}
+  <div>
+    <div class="fouls lcd clickable"
+        v-bind:class="{ bonus: this.bonus }"
+        @click="onClick($event)">
+      {{ value }}
+    </div>
+    <button class="button"
+      @click="$emit('decrement')">
+      -
+    </button>
   </div>
 </template>
 
@@ -39,5 +45,10 @@ export default class Fouls extends Vue {
 }
 .fouls.bonus {
   color: red;
+}
+button.button {
+  display: block;
+  width: 2.5em;
+  margin: 0.2em auto;
 }
 </style>
