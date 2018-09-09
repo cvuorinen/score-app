@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div id="app"
+    v-bind:class="{ editable: $store.state.editable }">
     <div class="container">
 
       <div class="clock-container">
@@ -32,6 +33,10 @@
         <Buzzer />
       </div>
 
+      <div class="footer-container">
+        <Footer />
+      </div>
+
     </div>
   </div>
 </template>
@@ -48,6 +53,7 @@ import Period from './components/Period.vue';
 import HomeFouls from './components/HomeFouls.vue';
 import AwayFouls from './components/AwayFouls.vue';
 import Buzzer from './components/Buzzer.vue';
+import Footer from './components/Footer.vue';
 
 @Component({
   store,
@@ -61,6 +67,7 @@ import Buzzer from './components/Buzzer.vue';
     HomeFouls,
     AwayFouls,
     Buzzer,
+    Footer,
   },
 })
 export default class App extends Vue {}
@@ -83,6 +90,7 @@ body {
   cursor: pointer;
 }
 .button {
+  visibility: hidden;
   font-size: 1.1rem;
   line-height: 0.7rem;
   padding: 0 0 0 0;
@@ -93,6 +101,9 @@ body {
   outline: none;
   cursor: pointer;
 }
+.editable .button {
+  visibility: visible;
+}
 
 /* Layout grid */
 .container {
@@ -100,23 +111,25 @@ body {
   grid-template-columns: 30% 40% 30%;
   grid-template-rows: auto;
   grid-template-areas:
-    "left          top         right"
-    "bottom-left bottom bottom-right";
+    "top-left      top     top-right"
+    "left        middle        right"
+    "bottom-left bottom bottom-right"
+    "footer      footer       footer";
 }
 .clock-container {
-  grid-area: top;
+  grid-area: middle;
   margin-top: 10%;
 }
 .home-score-container {
   grid-area: left;
-  margin-top: 30%;
+  margin-top: 20%;
 }
 .away-score-container {
   grid-area: right;
-  margin-top: 30%;
+  margin-top: 20%;
 }
 .middle-container {
-  margin-top: 20%;
+  margin-top: 10%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -130,6 +143,9 @@ body {
 .buzzer-container {
   grid-area: bottom;
   margin-top: 10%;
+}
+.footer-container {
+  grid-area: footer;
 }
 
 /* Fixed aspect ratio based on either width or height of the viewport */

@@ -24,7 +24,8 @@ export type State = {
   clock: {
     time: number;
     running: boolean;
-  }
+  },
+  editable: boolean;
 }
 
 // TODO ablity to configure time & max fouls
@@ -42,7 +43,8 @@ const defaultState: State = {
   clock: {
     time: 10*60,
     running: false
-  }
+  },
+  editable: false
 }
 
 let intervalID: any;
@@ -75,6 +77,7 @@ export default new Vuex.Store<State>({
     setClock: (state, running: boolean) => state.clock.running = running,
     setTime: (state, time: number) => state.clock.time = time,
     setPossession: (state, value: Possessions) => state.possession = value,
+    toggleEditable: (state) => state.editable = !state.editable
   },
   actions: {
     startClock ({ commit, dispatch }) {

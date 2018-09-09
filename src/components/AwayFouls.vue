@@ -42,7 +42,7 @@ export default class AwayFouls extends Vue {
 }
 .bonus-container {
   position: absolute;
-  bottom: 0.02em;
+  bottom: 0.06em;
   right: 0;
 }
 </style>

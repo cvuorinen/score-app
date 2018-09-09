@@ -53,7 +53,7 @@ export default class Clock extends Vue {
 .clock {
   border: .03em solid rgba(255, 255, 255, .8);
   border-radius: 0.06em;
-  padding: .1em;
+  padding: .2em .1em .1em .1em;
   font-size: 0.18em;
   color: red;
 }
@@ -68,9 +68,10 @@ export default class Clock extends Vue {
 }
 .clock .buttons {
   font-size: 0.3em;
+  line-height: 0.5em;
 }
-.clock .buttons button.button {
-  margin: 0 1em;
-  width: 5em;
+.clock button.button {
+  margin: 0 10%;
+  width: 30%;
 }
 </style>

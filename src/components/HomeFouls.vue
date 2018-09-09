@@ -42,7 +42,7 @@ export default class HomeFouls extends Vue {
 }
 .bonus-container {
   position: absolute;
-  bottom: 0.02em;
+  bottom: 0.06em;
   left: 0;
 }
 </style>
