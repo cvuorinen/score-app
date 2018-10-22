@@ -2,7 +2,7 @@
   <div class="period"
        v-shortkey="keyMap"
        @shortkey="keyAction">
-    <h5 contenteditable="true">
+    <h5 contenteditable="true" spellcheck="false">
       PERIOD
     </h5>
     <div class="lcd clickable"
