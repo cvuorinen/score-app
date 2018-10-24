@@ -1,32 +1,33 @@
 <template>
   <div class="footer">
-    <Checkbox @change="toggle"
-      :value="$store.state.editable">
-      Edit
-    </Checkbox>
+    <h2>
+      <span class="icon">
+        <font-awesome-icon icon="basketball-ball"></font-awesome-icon>
+      </span>
+      Score App
+    </h2>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import Checkbox from './Checkbox.vue';
 
-@Component({
-  components: { Checkbox }
-})
-export default class Footer extends Vue {
-  toggle () {
-    this.$store.commit('toggleEditable')
-  }
-}
+@Component
+export default class Footer extends Vue {}
 </script>
 
 <style scoped>
 .footer {
-  padding: 1em;
+  padding: 0.04em;
   padding-bottom: 0;
-  font-size: 0.04em;
-  text-align: left;
   color: rgba(255, 255, 255, 0.8);
+}
+.footer h2 {
+  font-size: 0.04em;
+  font-weight: 100;
+  font-variant: small-caps;
+}
+.footer .icon {
+  color: #e3732e;
 }
 </style>

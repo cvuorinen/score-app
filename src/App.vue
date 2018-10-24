@@ -33,8 +33,16 @@
         <Buzzer />
       </div>
 
+      <div class="edit-toggle-container">
+        <EditToggle />
+      </div>
+
       <div class="footer-container">
         <Footer />
+      </div>
+
+      <div class="made-by-container">
+        <MadeBy />
       </div>
 
     </div>
@@ -54,6 +62,8 @@ import HomeFouls from './components/HomeFouls.vue';
 import AwayFouls from './components/AwayFouls.vue';
 import Buzzer from './components/Buzzer.vue';
 import Footer from './components/Footer.vue';
+import EditToggle from './components/EditToggle.vue';
+import MadeBy from './components/MadeBy.vue';
 
 @Component({
   store,
@@ -68,6 +78,8 @@ import Footer from './components/Footer.vue';
     AwayFouls,
     Buzzer,
     Footer,
+    EditToggle,
+    MadeBy,
   },
 })
 export default class App extends Vue {}
@@ -114,7 +126,7 @@ body {
     "top-left      top     top-right"
     "left        middle        right"
     "bottom-left bottom bottom-right"
-    "footer      footer       footer";
+    "footer-left footer footer-right";
 }
 .clock-container {
   grid-area: middle;
@@ -144,8 +156,16 @@ body {
   grid-area: bottom;
   margin-top: 10%;
 }
+.edit-toggle-container {
+  grid-area: footer-left;
+}
+
 .footer-container {
   grid-area: footer;
+}
+
+.made-by-container {
+  grid-area: footer-right;
 }
 
 /* Fixed aspect ratio based on either width or height of the viewport */
