@@ -1,6 +1,6 @@
 {
-  "name": "score-app",
-  "short_name": "score-app",
+  "name": "Score App",
+  "short_name": "ScoreApp",
   "icons": [
     {
       "src": "/img/icons/android-chrome-192x192.png",
@@ -14,7 +14,8 @@
     }
   ],
   "start_url": "/index.html",
-  "display": "standalone",
+  "display": "fullscreen",
+  "orientation": "landscape",
   "background_color": "#000000",
-  "theme_color": "#4DBA87"
+  "theme_color": "#222222"
 }
