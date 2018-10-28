@@ -117,7 +117,8 @@ export default new Vuex.Store<State>({
       commit('setTime', time * 60)
     },
     playBuzzer() {
-      audio.play();
+      // Using cloneNode to overcome issue on iOS only playing the sound once
+      (audio.cloneNode() as HTMLAudioElement).play();
     }
   }
 })
