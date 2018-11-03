@@ -21,7 +21,7 @@ export default class MadeBy extends Vue {}
 .made-by {
   padding: 0.04em;
   padding-bottom: 0;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.2);
 }
 .made-by p {
   margin: 0;
@@ -29,7 +29,7 @@ export default class MadeBy extends Vue {}
   line-height: 3.5em;
 }
 .made-by a {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.2);
   text-decoration: none;
 }
 </style>
