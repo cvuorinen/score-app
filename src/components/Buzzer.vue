@@ -29,11 +29,11 @@ whenever(keys["Ctrl+B"], play);
 
 <style scoped>
 .buzzer {
-  width: 1em;
+  width: 2em;
   margin: 0 auto;
-  font-size: 0.04em;
+  font-size: 0.05em;
   color: white;
-  padding: 0.1em 0.3em;
+  padding: 0.5em 0.3em;
   border: 0.05em solid rgba(255, 255, 255, 0.8);
   border-radius: 0.1em;
 }
