@@ -9,12 +9,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-
-@Component
-export default class Footer extends Vue {}
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
 .footer {
@@ -22,11 +17,13 @@ export default class Footer extends Vue {}
   padding-bottom: 0;
   color: rgba(255, 255, 255, 0.8);
 }
+
 .footer h2 {
   font-size: 0.04em;
   font-weight: 100;
   font-variant: small-caps;
 }
+
 .footer .icon {
   color: #e3732e;
 }

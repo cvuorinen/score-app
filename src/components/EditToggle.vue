@@ -1,24 +1,16 @@
 <template>
   <div class="edit-toggle">
-    <Checkbox @change="toggle"
-      :value="$store.state.editable">
+    <Checkbox @change="store.toggleEditable" :value="store.editable">
       Edit
     </Checkbox>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import Checkbox from './Checkbox.vue';
+<script setup lang="ts">
+import { useScoreStore } from "../store";
+import Checkbox from "./Checkbox.vue";
 
-@Component({
-  components: { Checkbox }
-})
-export default class EditToggle extends Vue {
-  toggle () {
-    this.$store.commit('toggleEditable')
-  }
-}
+const store = useScoreStore();
 </script>
 
 <style scoped>

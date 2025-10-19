@@ -1,39 +1,31 @@
 <template>
   <div>
-    <div class="fouls lcd clickable"
-        v-bind:class="{ bonus: this.bonus }"
-        @click="onClick($event)">
+    <div class="fouls lcd clickable" :class="{ bonus }" @click="onClick($event)">
       {{ value }}
     </div>
-    <button class="button"
-      @click="$emit('decrement')">
-      -
-    </button>
+    <button class="button" @click="emit('decrement')">-</button>
   </div>
 </template>
 
-<script lang="ts">
-import { VNode } from 'vue'
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import Digits from './Digits.vue';
+<script setup lang="ts">
+import { computed } from "vue";
 
-@Component({
-  components: { Digits },
-  props: { value: Number }
-})
-export default class Fouls extends Vue {
-  value!: number;
+const props = defineProps<{
+  value: number;
+}>();
 
-  get bonus () {
-    return this.value >= 5;
-  }
+const emit = defineEmits<{
+  increment: [];
+  decrement: [];
+}>();
 
-  onClick (event: MouseEvent) {
-    if (event.ctrlKey) {
-      this.$emit('decrement')
-    } else {
-      this.$emit('increment')
-    }
+const bonus = computed(() => props.value >= 5);
+
+function onClick(event: MouseEvent) {
+  if (event.ctrlKey) {
+    emit("decrement");
+  } else {
+    emit("increment");
   }
 }
 </script>
@@ -43,9 +35,11 @@ export default class Fouls extends Vue {
   font-size: 0.1em;
   color: orange;
 }
+
 .fouls.bonus {
   color: red;
 }
+
 button.button {
   display: block;
   width: 2.5em;

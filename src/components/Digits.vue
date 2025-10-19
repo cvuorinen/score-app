@@ -2,27 +2,22 @@
   <span class="lcd">{{ formattedValue }}</span>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+<script setup lang="ts">
+import { computed } from "vue";
 
-@Component({
-  props: {
-    value: Number,
+const props = defineProps<{
+  value: number;
+}>();
+
+const formattedValue = computed(() => {
+  if (!Number.isInteger(props.value)) {
+    return "";
   }
-})
-export default class Digits extends Vue {
-  @Prop() private value!: number;
 
-  get formattedValue(): string {
-    if (!Number.isInteger(this.value)) {
-      return '';
-    }
-
-    if (this.value < 10) {
-      return '0' + this.value.toFixed();
-    }
-
-    return this.value.toFixed();
+  if (props.value < 10) {
+    return "0" + props.value.toFixed();
   }
-}
+
+  return props.value.toFixed();
+});
 </script>

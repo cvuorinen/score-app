@@ -1,38 +1,38 @@
 <template>
-  <div v-shortkey="keyMap"
-       @shortkey="keyAction">
-    <h3 contenteditable="true" spellcheck="false">
-      AWAY
-    </h3>
-    <Score :value="this.$store.state.score.away"
-           @increment="increment"
-           @decrement="decrement" />
+  <div>
+    <h3 contenteditable="true" spellcheck="false">AWAY</h3>
+    <Score :value="store.score.away" @increment="increment" @decrement="decrement" />
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import Score from './Score.vue';
+<script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
+import { useScoreStore } from "../store";
+import Score from "./Score.vue";
 
-@Component({
-  components: { Score },
-})
-export default class AwayScore extends Vue {
-  increment () {
-    this.$store.commit('incrementAway')
-  }
-  decrement () {
-    this.$store.commit('decrementAway')
-  }
+const store = useScoreStore();
 
-  keyMap = { increment: ['arrowup'], decrement: ['arrowdown'] }
-  keyAction (event: { srcKey: string }) {
-    switch (event.srcKey) {
-      case 'increment':
-        return this.increment()
-      case 'decrement':
-        return this.decrement()
-    }
+function increment() {
+  store.incrementAway();
+}
+
+function decrement() {
+  store.decrementAway();
+}
+
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === "ArrowUp") {
+    increment();
+  } else if (event.key === "ArrowDown") {
+    decrement();
   }
 }
+
+onMounted(() => {
+  document.addEventListener("keydown", handleKeydown);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", handleKeydown);
+});
 </script>

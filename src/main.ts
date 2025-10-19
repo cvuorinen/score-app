@@ -1,18 +1,20 @@
-import Vue from 'vue'
-import App from './App.vue'
-import store from './store'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBasketballBall } from '@fortawesome/free-solid-svg-icons'
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import './registerServiceWorker'
+import { createApp } from "vue";
+import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+import App from "./App.vue";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faBasketballBall } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-Vue.config.productionTip = false
-Vue.use(require('vue-shortkey'))
+library.add(faBasketballBall, faGithub);
 
-library.add(faBasketballBall, faGithub)
-Vue.component('font-awesome-icon', require('@fortawesome/vue-fontawesome').FontAwesomeIcon)
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
-new Vue({
-  store,
-  render: h => h(App)
-}).$mount('#app')
+const app = createApp(App);
+
+app.component("font-awesome-icon", FontAwesomeIcon);
+app.use(pinia);
+
+app.mount("#app");

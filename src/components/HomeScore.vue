@@ -1,38 +1,38 @@
 <template>
-  <div v-shortkey="keyMap"
-       @shortkey="keyAction">
-    <h3 contenteditable="true" spellcheck="false">
-      HOME
-    </h3>
-    <Score :value="this.$store.state.score.home"
-           @increment="increment"
-           @decrement="decrement" />
+  <div>
+    <h3 contenteditable="true" spellcheck="false">HOME</h3>
+    <Score :value="store.score.home" @increment="increment" @decrement="decrement" />
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import Score from './Score.vue';
+<script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
+import { useScoreStore } from "../store";
+import Score from "./Score.vue";
 
-@Component({
-  components: { Score },
-})
-export default class HomeScore extends Vue {
-  increment () {
-    this.$store.commit('incrementHome')
-  }
-  decrement () {
-    this.$store.commit('decrementHome')
-  }
+const store = useScoreStore();
 
-  keyMap = { increment: ['1'], decrement: ['§'] }
-  keyAction (event: { srcKey: string }) {
-    switch (event.srcKey) {
-      case 'increment':
-        return this.increment()
-      case 'decrement':
-        return this.decrement()
-    }
+function increment() {
+  store.incrementHome();
+}
+
+function decrement() {
+  store.decrementHome();
+}
+
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === "1") {
+    increment();
+  } else if (event.key === "§") {
+    decrement();
   }
 }
+
+onMounted(() => {
+  document.addEventListener("keydown", handleKeydown);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", handleKeydown);
+});
 </script>

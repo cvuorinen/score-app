@@ -1,54 +1,50 @@
 <template>
-  <div class="period"
-       v-shortkey="keyMap"
-       @shortkey="keyAction">
-    <h5 contenteditable="true" spellcheck="false">
-      PERIOD
-    </h5>
-    <div class="lcd clickable"
-         @click="onClick($event)">
-      {{ this.$store.state.period }}
+  <div class="period">
+    <h5 contenteditable="true" spellcheck="false">PERIOD</h5>
+    <div class="lcd clickable" @click="onClick($event)">
+      {{ store.period }}
     </div>
-    <button class="button"
-      @click="decrement">
-      -
-    </button>
+    <button class="button" @click="decrement">-</button>
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import Digits from './Digits.vue';
+<script setup lang="ts">
+import { onMounted, onUnmounted } from "vue";
+import { useScoreStore } from "../store";
 
-@Component({
-  components: { Digits },
-})
-export default class Period extends Vue {
-  onClick (event: MouseEvent) {
-    if (event.ctrlKey) {
-      this.decrement()
-    } else {
-      this.increment()
-    }
-  }
+const store = useScoreStore();
 
-  increment () {
-    this.$store.commit('incrementPeriod')
-  }
-  decrement () {
-    this.$store.commit('decrementPeriod')
-  }
-
-  keyMap = { increment: ['pageup'], decrement: ['pagedown'] }
-  keyAction (event: { srcKey: string }) {
-    switch (event.srcKey) {
-      case 'increment':
-        return this.increment()
-      case 'decrement':
-        return this.decrement()
-    }
+function onClick(event: MouseEvent) {
+  if (event.ctrlKey) {
+    decrement();
+  } else {
+    increment();
   }
 }
+
+function increment() {
+  store.incrementPeriod();
+}
+
+function decrement() {
+  store.decrementPeriod();
+}
+
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === "PageUp") {
+    increment();
+  } else if (event.key === "PageDown") {
+    decrement();
+  }
+}
+
+onMounted(() => {
+  document.addEventListener("keydown", handleKeydown);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", handleKeydown);
+});
 </script>
 
 <style scoped>
@@ -56,6 +52,7 @@ export default class Period extends Vue {
   font-size: 0.1em;
   color: greenyellow;
 }
+
 button.button {
   display: block;
   width: 2.5em;

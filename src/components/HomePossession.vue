@@ -1,25 +1,17 @@
 <template>
-  <Possession :direction="'home'"
-              @toggle="toggle" />
+  <Possession direction="home" @toggle="toggle" />
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Store } from 'vuex';
-import { State, Possessions } from '../store';
-import Possession from './Possession.vue';
+<script setup lang="ts">
+import { useScoreStore, Possessions } from "../store";
+import Possession from "./Possession.vue";
 
-@Component({
-  components: { Possession },
-})
-export default class HomePossession extends Vue {
-  $store!: Store<State>;
+const store = useScoreStore();
 
-  toggle () {
-    const newPossession = this.$store.state.possession === Possessions.Home
-      ? Possessions.None : Possessions.Home;
+function toggle() {
+  const newPossession =
+    store.possession === Possessions.Home ? Possessions.None : Possessions.Home;
 
-    this.$store.commit('setPossession', newPossession)
-  }
+  store.setPossession(newPossession);
 }
 </script>

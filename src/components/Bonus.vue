@@ -1,23 +1,15 @@
 <template>
-  <div class="bonus"
-       v-bind:class="{ active: this.active }">
-  </div>
+  <div class="bonus" :class="{ active }"></div>
 </template>
 
-<script lang="ts">
-import { VNode } from 'vue'
-import { Component, Prop, Vue } from 'vue-property-decorator';
+<script setup lang="ts">
+import { computed } from "vue";
 
-@Component({
-  props: { value: Number }
-})
-export default class Bonus extends Vue {
-  value!: number;
+const props = defineProps<{
+  value: number;
+}>();
 
-  get active () {
-    return this.value >= 5;
-  }
-}
+const active = computed(() => props.value >= 5);
 </script>
 
 <style scoped>
@@ -26,8 +18,9 @@ export default class Bonus extends Vue {
   height: 0.08em;
   border-radius: 50%;
   background-color: red;
-  opacity: .2;
+  opacity: 0.2;
 }
+
 .bonus.active {
   opacity: 1;
   box-shadow: 0 0 0.05em 0.003em red;

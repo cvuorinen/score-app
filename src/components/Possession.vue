@@ -1,33 +1,26 @@
 <template>
-  <div class="possession clickable"
-       v-bind:class="{
-         active: this.active,
-         home: this.direction === 'home',
-         away: this.direction === 'away',
-       }"
-       @click="onClick">
-  </div>
+  <div class="possession clickable" :class="{
+    active,
+    home: direction === 'home',
+    away: direction === 'away',
+  }" @click="emit('toggle')"></div>
 </template>
 
-<script lang="ts">
-import { VNode } from 'vue'
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import Digits from './Digits.vue';
+<script setup lang="ts">
+import { computed } from "vue";
+import { useScoreStore } from "../store";
 
-@Component({
-  props: { direction: String }
-})
-export default class Possession extends Vue {
-  direction!: string;
+const props = defineProps<{
+  direction: string;
+}>();
 
-  get active () {
-    return this.$store.state.possession === this.direction;
-  }
+const emit = defineEmits<{
+  toggle: [];
+}>();
 
-  onClick () {
-    this.$emit('toggle')
-  }
-}
+const store = useScoreStore();
+
+const active = computed(() => store.possession === props.direction);
 </script>
 
 <style scoped>
@@ -35,15 +28,18 @@ export default class Possession extends Vue {
   width: 0;
   height: 0;
   border-style: solid;
-  opacity: .3;
+  opacity: 0.3;
 }
+
 .possession.active {
   opacity: 1;
 }
+
 .possession.home {
   border-width: 0.03em 0.2em 0.03em 0;
   border-color: transparent red transparent transparent;
 }
+
 .possession.away {
   border-width: 0.03em 0 0.03em 0.2em;
   border-color: transparent transparent transparent red;
