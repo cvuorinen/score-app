@@ -15,7 +15,7 @@ const store = useScoreStore();
 
 <style scoped>
 .edit-toggle {
-  padding: 1em;
+  padding: 0.5em 1em;
   padding-bottom: 0;
   font-size: 0.04em;
   text-align: left;

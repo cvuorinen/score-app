@@ -13,7 +13,7 @@
 
 <style scoped>
 .footer {
-  padding: 0.04em;
+  padding: 0.02em;
   padding-bottom: 0;
   color: rgba(255, 255, 255, 0.8);
 }

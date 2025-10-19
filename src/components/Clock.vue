@@ -48,7 +48,7 @@ whenever(keys.enter, toggle);
 .clock {
   border: 0.03em solid rgba(255, 255, 255, 0.8);
   border-radius: 0.06em;
-  padding: 0.2em 0.1em 0.1em 0.1em;
+  padding: 0.2em 0.1em 0.05em 0.1em;
   font-size: 0.18em;
   color: red;
 }
@@ -73,5 +73,7 @@ whenever(keys.enter, toggle);
 .clock button.button {
   margin: 0 10%;
   width: 30%;
+  font-size: 1em;
+  line-height: 1rem;
 }
 </style>

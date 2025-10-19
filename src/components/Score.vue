@@ -37,6 +37,8 @@ function onClick(event: MouseEvent) {
 button.button {
   display: block;
   width: 5em;
-  margin: 0.2em auto;
+  margin: -0.3em auto 0;
+  padding: 0.3em 0;
+  font-size: 0.06em;
 }
 </style>

@@ -46,5 +46,7 @@ button.button {
   display: block;
   width: 2.5em;
   margin: 0.2em auto;
+  padding: 0.2em 0;
+  font-size: 0.06em;
 }
 </style>
