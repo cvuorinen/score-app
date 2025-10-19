@@ -70,6 +70,7 @@ body {
   padding: 0;
   background: #111;
   color: #fefefe;
+  touch-action: manipulation;
 }
 
 #app {
