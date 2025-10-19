@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
+import { useMagicKeys, whenever } from "@vueuse/core";
 import { useScoreStore } from "../store";
 
 const store = useScoreStore();
@@ -30,21 +30,10 @@ function decrement() {
   store.decrementPeriod();
 }
 
-function handleKeydown(event: KeyboardEvent) {
-  if (event.key === "PageUp") {
-    increment();
-  } else if (event.key === "PageDown") {
-    decrement();
-  }
-}
-
-onMounted(() => {
-  document.addEventListener("keydown", handleKeydown);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("keydown", handleKeydown);
-});
+// VueUse keyboard shortcuts
+const keys = useMagicKeys();
+whenever(keys.PageUp, increment);
+whenever(keys.PageDown, decrement);
 </script>
 
 <style scoped>

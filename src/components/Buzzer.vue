@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
+import { useMagicKeys, whenever } from "@vueuse/core";
 import { useScoreStore } from "../store";
 
 const store = useScoreStore();
@@ -14,20 +14,17 @@ function play() {
   store.playBuzzer();
 }
 
-function handleKeydown(event: KeyboardEvent) {
-  if (event.ctrlKey && event.key === "b") {
-    event.preventDefault();
-    play();
-  }
-}
-
-onMounted(() => {
-  document.addEventListener("keydown", handleKeydown);
+// VueUse keyboard shortcuts
+const keys = useMagicKeys({
+  passive: false,
+  onEventFired(e) {
+    if (e.ctrlKey && e.key === "b") {
+      e.preventDefault();
+    }
+  },
 });
 
-onUnmounted(() => {
-  document.removeEventListener("keydown", handleKeydown);
-});
+whenever(keys["Ctrl+B"], play);
 </script>
 
 <style scoped>

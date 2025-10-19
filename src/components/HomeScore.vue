@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
+import { useMagicKeys, whenever } from "@vueuse/core";
 import { useScoreStore } from "../store";
 import Score from "./Score.vue";
 
@@ -20,19 +20,8 @@ function decrement() {
   store.decrementHome();
 }
 
-function handleKeydown(event: KeyboardEvent) {
-  if (event.key === "1") {
-    increment();
-  } else if (event.key === "§") {
-    decrement();
-  }
-}
-
-onMounted(() => {
-  document.addEventListener("keydown", handleKeydown);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("keydown", handleKeydown);
-});
+// VueUse keyboard shortcuts
+const keys = useMagicKeys();
+whenever(keys["1"], increment);
+whenever(keys["§"], decrement);
 </script>

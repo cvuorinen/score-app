@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from "vue";
+import { useMagicKeys, whenever } from "@vueuse/core";
 import { useScoreStore } from "../store";
 import Digits from "./Digits.vue";
 
@@ -30,20 +30,18 @@ function decrement() {
   store.decrementClock();
 }
 
-function handleKeydown(event: KeyboardEvent) {
-  if (event.key === " " || event.key === "Enter") {
-    event.preventDefault();
-    toggle();
-  }
-}
-
-onMounted(() => {
-  document.addEventListener("keydown", handleKeydown);
+// VueUse keyboard shortcuts
+const keys = useMagicKeys({
+  passive: false,
+  onEventFired(e) {
+    if (e.key === " " || e.key === "Enter") {
+      e.preventDefault();
+    }
+  },
 });
 
-onUnmounted(() => {
-  document.removeEventListener("keydown", handleKeydown);
-});
+whenever(keys.space, toggle);
+whenever(keys.enter, toggle);
 </script>
 
 <style scoped>
