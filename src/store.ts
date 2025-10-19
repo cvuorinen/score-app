@@ -28,6 +28,8 @@ export type State = {
 // load audio so it's ready when needed
 const audio = new Audio("/buzzer.mp3");
 
+const DEFAULT_TIME = 10 * 60; // 10 minutes in seconds
+
 let intervalID: any;
 
 export const useScoreStore = defineStore(
@@ -48,7 +50,7 @@ export const useScoreStore = defineStore(
     const period = ref(1);
     const possession = ref(Possessions.None);
     const clock = ref({
-      time: 10 * 60,
+      time: DEFAULT_TIME,
       running: false,
     });
     const editable = ref(false);
@@ -160,6 +162,11 @@ export const useScoreStore = defineStore(
       setTime(time * 60);
     }
 
+    function resetClock() {
+      stopClock();
+      setTime(DEFAULT_TIME);
+    }
+
     // Actions - Other
     function setPossession(value: Possessions) {
       possession.value = value;
@@ -204,6 +211,7 @@ export const useScoreStore = defineStore(
       updateClock,
       incrementClock,
       decrementClock,
+      resetClock,
       setPossession,
       toggleEditable,
       playBuzzer,

@@ -6,6 +6,7 @@
     </div>
     <div class="buttons">
       <button class="button" @click="increment">+</button>
+      <button class="button button-reset" @click="reset">🔁</button>
       <button class="button" @click="decrement">-</button>
     </div>
   </div>
@@ -30,11 +31,15 @@ function decrement() {
   store.decrementClock();
 }
 
+function reset() {
+  store.resetClock();
+}
+
 // VueUse keyboard shortcuts
 const keys = useMagicKeys({
   passive: false,
   onEventFired(e) {
-    if (e.key === " " || e.key === "Enter") {
+    if (e.key === " " || e.key === "Enter" || (e.ctrlKey && e.key === "r")) {
       e.preventDefault();
     }
   },
@@ -42,6 +47,7 @@ const keys = useMagicKeys({
 
 whenever(keys.space, toggle);
 whenever(keys.enter, toggle);
+whenever(keys["Ctrl+R"], reset);
 </script>
 
 <style scoped>
@@ -68,12 +74,19 @@ whenever(keys.enter, toggle);
 .clock .buttons {
   font-size: 0.3em;
   line-height: 0.5em;
+  display: flex;
+  justify-content: center;
+  gap: 0.3em;
 }
 
 .clock button.button {
-  margin: 0 10%;
-  width: 30%;
+  width: 3em;
   font-size: 1em;
   line-height: 1rem;
+}
+
+.clock button.button-reset {
+  border: none;
+  font-size: 0.8em;
 }
 </style>
