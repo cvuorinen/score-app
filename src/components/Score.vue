@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="score clickable" @click="onClick($event)">
+    <div class="score clickable" :class="{ hundred: value > 99 }" @click="onClick($event)">
       <Digits :value="value" />
     </div>
     <button class="button" @click="emit('decrement')">-</button>
@@ -32,6 +32,10 @@ function onClick(event: MouseEvent) {
 .score {
   font-size: 0.3em;
   color: orange;
+
+  &.hundred {
+    font-size: 0.2em;
+  }
 }
 
 button.button {
