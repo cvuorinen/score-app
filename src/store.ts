@@ -28,7 +28,7 @@ export type State = {
 // load audio so it's ready when needed
 const audio = new Audio("/buzzer.mp3");
 
-const DEFAULT_TIME = 10 * 60; // 10 minutes in seconds
+const DEFAULT_TIME = 10; // 10 minutes
 
 let intervalID: any;
 
@@ -50,7 +50,7 @@ export const useScoreStore = defineStore(
     const period = ref(1);
     const possession = ref(Possessions.None);
     const clock = ref({
-      time: DEFAULT_TIME,
+      time: DEFAULT_TIME * 60,
       running: false,
     });
     const editable = ref(false);
@@ -104,6 +104,9 @@ export const useScoreStore = defineStore(
     // Actions - Period
     function incrementPeriod() {
       period.value++;
+      if (!clock.value.time) {
+        resetClock();
+      }
     }
 
     function decrementPeriod() {
@@ -164,7 +167,7 @@ export const useScoreStore = defineStore(
 
     function resetClock() {
       stopClock();
-      setTime(DEFAULT_TIME);
+      setTime(DEFAULT_TIME * 60);
     }
 
     // Actions - Other
