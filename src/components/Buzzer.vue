@@ -34,7 +34,7 @@ whenever(keys["Ctrl+B"], play);
   font-size: 0.05em;
   color: white;
   padding: 0.5em 0.3em;
-  border: 0.05em solid rgba(255, 255, 255, 0.8);
+  border: max(0.05em, 2px) solid rgba(255, 255, 255, 0.8);
   border-radius: 0.1em;
 }
 </style>

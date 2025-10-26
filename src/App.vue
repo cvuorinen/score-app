@@ -31,16 +31,8 @@
         <Buzzer />
       </div>
 
-      <div class="edit-toggle-container">
-        <EditToggle />
-      </div>
-
       <div class="footer-container">
         <Footer />
-      </div>
-
-      <div class="made-by-container">
-        <MadeBy />
       </div>
     </div>
   </div>
@@ -58,8 +50,6 @@ import HomeFouls from "./components/HomeFouls.vue";
 import AwayFouls from "./components/AwayFouls.vue";
 import Buzzer from "./components/Buzzer.vue";
 import Footer from "./components/Footer.vue";
-import EditToggle from "./components/EditToggle.vue";
-import MadeBy from "./components/MadeBy.vue";
 
 const store = useScoreStore();
 </script>
@@ -110,12 +100,12 @@ body {
     "top-left      top     top-right"
     "left        middle        right"
     "bottom-left bottom bottom-right"
-    "footer-left footer footer-right";
+    "footer      footer       footer";
 }
 
 .clock-container {
   grid-area: middle;
-  margin-top: 10%;
+  margin-top: 8%;
 }
 
 .home-score-container {
@@ -129,7 +119,7 @@ body {
 }
 
 .middle-container {
-  margin-top: 10%;
+  margin-top: 5%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -148,16 +138,8 @@ body {
   margin-top: 10%;
 }
 
-.edit-toggle-container {
-  grid-area: footer-left;
-}
-
 .footer-container {
   grid-area: footer;
-}
-
-.made-by-container {
-  grid-area: footer-right;
 }
 
 /* Fixed aspect ratio based on either width or height of the viewport */

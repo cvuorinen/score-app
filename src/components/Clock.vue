@@ -52,7 +52,7 @@ whenever(keys["Ctrl+R"], reset);
 
 <style scoped>
 .clock {
-  border: 0.03em solid rgba(255, 255, 255, 0.8);
+  border: max(0.03em, 2px) solid rgba(255, 255, 255, 0.8);
   border-radius: 0.06em;
   padding: 0.2em 0.1em 0.05em 0.1em;
   font-size: 0.18em;
@@ -72,17 +72,16 @@ whenever(keys["Ctrl+R"], reset);
 }
 
 .clock .buttons {
-  font-size: 0.3em;
-  line-height: 0.5em;
+  font-size: 0.25em;
   display: flex;
   justify-content: center;
   gap: 0.3em;
 }
 
 .clock button.button {
-  width: 3em;
+  width: 4em;
   font-size: 1em;
-  line-height: 1rem;
+  line-height: 0.7em;
 }
 
 .clock button.button-reset {
