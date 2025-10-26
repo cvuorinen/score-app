@@ -1,75 +1,62 @@
 <template>
     <div class="help">
-        <button class="help-button" @click="showDialog = true"><b>?</b> Help</button>
+        <button class="help-button" @click="showDialog = true">
+            <font-awesome-icon icon="circle-info"></font-awesome-icon>
 
-        <Teleport to="body">
-            <div v-if="showDialog" class="dialog-overlay" @click="showDialog = false">
-                <div class="dialog" @click.stop>
-                    <div class="dialog-header">
-                        <h2>Keyboard Shortcuts</h2>
-                        <button class="close-button" @click="showDialog = false">×</button>
-                    </div>
+        </button>
 
-                    <div class="dialog-content">
-                        <div class="shortcut-section">
-                            <div class="shortcut">
-                                <kbd>Space</kbd> / <kbd>Enter</kbd>
-                                <span>Toggle clock start/stop</span>
-                            </div>
-                            <div class="shortcut">
-                                <kbd>1</kbd>
-                                <span>Increment home score</span>
-                            </div>
-                            <div class="shortcut">
-                                <kbd>§</kbd>
-                                <span>Decrement home score</span>
-                            </div>
-                            <div class="shortcut">
-                                <kbd>↑</kbd>
-                                <span>Increment away score</span>
-                            </div>
-                            <div class="shortcut">
-                                <kbd>↓</kbd>
-                                <span>Decrement away score</span>
-                            </div>
-                            <div class="shortcut">
-                                <kbd>Page Up</kbd>
-                                <span>Increment period</span>
-                            </div>
-                            <div class="shortcut">
-                                <kbd>Page Down</kbd>
-                                <span>Decrement period</span>
-                            </div>
-                            <div class="shortcut">
-                                <kbd>Ctrl</kbd> + <kbd>B</kbd>
-                                <span>Play buzzer sound</span>
-                            </div>
-                            <div class="shortcut">
-                                <kbd>Ctrl</kbd> + <kbd>R</kbd>
-                                <span>Reset clock</span>
-                            </div>
-                        </div>
-
-                        <div class="shortcut-note">
-                            💡 Tip: Click on scores, period, or fouls with <kbd>Ctrl</kbd> held to decrement
-                        </div>
-                    </div>
+        <Dialog :show="showDialog" title="Keyboard Shortcuts" @close="showDialog = false">
+            <div class="shortcut-section">
+                <div class="shortcut">
+                    <kbd>Space</kbd> / <kbd>Enter</kbd>
+                    <span>Toggle clock start/stop</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>1</kbd>
+                    <span>Increment home score</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>§</kbd>
+                    <span>Decrement home score</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>↑</kbd>
+                    <span>Increment away score</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>↓</kbd>
+                    <span>Decrement away score</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>Page Up</kbd>
+                    <span>Increment period</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>Page Down</kbd>
+                    <span>Decrement period</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>Ctrl</kbd> + <kbd>B</kbd>
+                    <span>Play buzzer sound</span>
+                </div>
+                <div class="shortcut">
+                    <kbd>Ctrl</kbd> + <kbd>R</kbd>
+                    <span>Reset clock</span>
                 </div>
             </div>
-        </Teleport>
+
+            <div class="shortcut-note">
+                💡 Tip: Click on scores, period, or fouls with <kbd>Ctrl</kbd> held to decrement
+            </div>
+        </Dialog>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { onKeyStroke } from "@vueuse/core";
+import Dialog from "./Dialog.vue";
 
 const showDialog = ref(false);
-
-// Close dialog with Escape key
-onKeyStroke("Escape", () => {
-    showDialog.value = false;
-});
 </script>
 
 <style scoped>
@@ -79,98 +66,16 @@ onKeyStroke("Escape", () => {
 }
 
 .help-button {
+    padding: 0.3em 0.6em;
     border: none;
     background: transparent;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.6);
     font-size: 1em;
     cursor: pointer;
-    transition: all 0.2s;
 }
 
 .help-button:hover {
     color: white;
-}
-
-.dialog-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    animation: fadeIn 0.2s ease-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-.dialog {
-    background: #222;
-    border: 0.2em solid rgba(255, 255, 255, 0.2);
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    animation: slideIn 0.3s ease-out;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.dialog-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1em 2em;
-    border-bottom: 0.1em solid rgba(255, 255, 255, 0.1);
-}
-
-.dialog-header h2 {
-    margin: 0;
-    color: white;
-    font-size: 1.5em;
-}
-
-.close-button {
-    width: 2em;
-    height: 2em;
-    border: none;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 2em;
-    line-height: 1;
-    cursor: pointer;
-    border-radius: 0.2em;
-    transition: background 0.2s;
-}
-
-.close-button:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.dialog-content {
-    padding: 2em;
-    color: rgba(255, 255, 255, 0.9);
 }
 
 .shortcut-section {
@@ -219,23 +124,5 @@ kbd {
 .shortcut-note kbd {
     font-size: 0.85em;
     padding: 0.2em 0.5em;
-}
-
-/* Scrollbar styling */
-.dialog::-webkit-scrollbar {
-    width: 0.5em;
-}
-
-.dialog::-webkit-scrollbar-track {
-    background: #111;
-}
-
-.dialog::-webkit-scrollbar-thumb {
-    background: #444;
-    border-radius: 0.25em;
-}
-
-.dialog::-webkit-scrollbar-thumb:hover {
-    background: #666;
 }
 </style>

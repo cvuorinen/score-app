@@ -7,8 +7,10 @@
 <script setup lang="ts">
 import { useMagicKeys, whenever } from "@vueuse/core";
 import { useScoreStore } from "../store";
+import { useIsInputFocused } from "../composables/useKeyboardShortcuts";
 
 const store = useScoreStore();
+const isInputFocused = useIsInputFocused();
 
 function play() {
   store.playBuzzer();
@@ -18,13 +20,13 @@ function play() {
 const keys = useMagicKeys({
   passive: false,
   onEventFired(e) {
-    if (e.ctrlKey && e.key === "b") {
+    if ((e.ctrlKey && e.key === "b") && !isInputFocused()) {
       e.preventDefault();
     }
   },
 });
 
-whenever(keys["Ctrl+B"], play);
+whenever(keys["Ctrl+B"], () => !isInputFocused() && play());
 </script>
 
 <style scoped>

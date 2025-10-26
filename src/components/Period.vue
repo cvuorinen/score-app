@@ -11,8 +11,10 @@
 <script setup lang="ts">
 import { useMagicKeys, whenever } from "@vueuse/core";
 import { useScoreStore } from "../store";
+import { useIsInputFocused } from "../composables/useKeyboardShortcuts";
 
 const store = useScoreStore();
+const isInputFocused = useIsInputFocused();
 
 function onClick(event: MouseEvent) {
   if (event.ctrlKey) {
@@ -32,8 +34,8 @@ function decrement() {
 
 // VueUse keyboard shortcuts
 const keys = useMagicKeys();
-whenever(keys.PageUp, increment);
-whenever(keys.PageDown, decrement);
+whenever(keys.PageUp, () => !isInputFocused() && increment());
+whenever(keys.PageDown, () => !isInputFocused() && decrement());
 </script>
 
 <style scoped>

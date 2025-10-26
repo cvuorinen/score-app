@@ -3,6 +3,8 @@
 
     <EditToggle />
 
+    <Settings />
+
     <h2>
       Score
       <span class="icon">
@@ -20,6 +22,7 @@
 <script setup lang="ts">
 import EditToggle from "./EditToggle.vue";
 import MadeBy from "./MadeBy.vue";
+import Settings from "./Settings.vue";
 import Help from "./Help.vue";
 </script>
 

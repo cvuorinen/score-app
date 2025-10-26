@@ -4,12 +4,14 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { useScoreStore } from "../store";
 
 const props = defineProps<{
   value: number;
 }>();
 
-const active = computed(() => props.value >= 5);
+const store = useScoreStore();
+const active = computed(() => props.value >= store.settings.bonusLimit);
 </script>
 
 <style scoped>

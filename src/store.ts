@@ -28,15 +28,20 @@ export type State = {
 // load audio so it's ready when needed
 const audio = new Audio("/buzzer.mp3");
 
-const DEFAULT_TIME = 10; // 10 minutes
-
 let intervalID: any;
 
 export const useScoreStore = defineStore(
   "score",
   () => {
+    // Settings
+    const settings = ref({
+      homeTeam: "HOME",
+      awayTeam: "AWAY",
+      periodLength: 10, // minutes
+      bonusLimit: 5, // fouls before bonus
+    });
+
     // Default state
-    // TODO ablity to configure time & max fouls
     const score = ref({
       home: 0,
       away: 0,
@@ -50,7 +55,7 @@ export const useScoreStore = defineStore(
     const period = ref(1);
     const possession = ref(Possessions.None);
     const clock = ref({
-      time: DEFAULT_TIME * 60,
+      time: settings.value.periodLength * 60,
       running: false,
     });
     const editable = ref(false);
@@ -167,7 +172,17 @@ export const useScoreStore = defineStore(
 
     function resetClock() {
       stopClock();
-      setTime(DEFAULT_TIME * 60);
+      setTime(settings.value.periodLength * 60);
+    }
+
+    // Actions - Settings
+    function updateSettings(newSettings: {
+      homeTeam: string;
+      awayTeam: string;
+      periodLength: number;
+      bonusLimit: number;
+    }) {
+      settings.value = { ...newSettings };
     }
 
     // Actions - Other
@@ -192,6 +207,7 @@ export const useScoreStore = defineStore(
       possession,
       clock,
       editable,
+      settings,
       // Getters
       minutes,
       seconds,
@@ -215,6 +231,7 @@ export const useScoreStore = defineStore(
       incrementClock,
       decrementClock,
       resetClock,
+      updateSettings,
       setPossession,
       toggleEditable,
       playBuzzer,

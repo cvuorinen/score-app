@@ -15,9 +15,11 @@
 <script setup lang="ts">
 import { useMagicKeys, whenever } from "@vueuse/core";
 import { useScoreStore } from "../store";
+import { useIsInputFocused } from "../composables/useKeyboardShortcuts";
 import Digits from "./Digits.vue";
 
 const store = useScoreStore();
+const isInputFocused = useIsInputFocused();
 
 function toggle() {
   store.toggleClock();
@@ -39,15 +41,16 @@ function reset() {
 const keys = useMagicKeys({
   passive: false,
   onEventFired(e) {
-    if (e.key === " " || e.key === "Enter" || (e.ctrlKey && e.key === "r")) {
+    if ((e.key === " " || e.key === "Enter" || (e.ctrlKey && e.key === "r"))
+      && !isInputFocused()) {
       e.preventDefault();
     }
   },
 });
 
-whenever(keys.space, toggle);
-whenever(keys.enter, toggle);
-whenever(keys["Ctrl+R"], reset);
+whenever(keys.space, () => !isInputFocused() && toggle());
+whenever(keys.enter, () => !isInputFocused() && toggle());
+whenever(keys["Ctrl+R"], () => !isInputFocused() && reset());
 </script>
 
 <style scoped>

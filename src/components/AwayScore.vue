@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 contenteditable="true" spellcheck="false">AWAY</h3>
+    <h3 contenteditable="true" spellcheck="false">{{ store.settings.awayTeam }}</h3>
     <Score :value="store.score.away" @increment="increment" @decrement="decrement" />
   </div>
 </template>
@@ -8,9 +8,11 @@
 <script setup lang="ts">
 import { useMagicKeys, whenever } from "@vueuse/core";
 import { useScoreStore } from "../store";
+import { useIsInputFocused } from "../composables/useKeyboardShortcuts";
 import Score from "./Score.vue";
 
 const store = useScoreStore();
+const isInputFocused = useIsInputFocused();
 
 function increment() {
   store.incrementAway();
@@ -22,6 +24,6 @@ function decrement() {
 
 // VueUse keyboard shortcuts
 const keys = useMagicKeys();
-whenever(keys.ArrowUp, increment);
-whenever(keys.ArrowDown, decrement);
+whenever(keys.ArrowUp, () => !isInputFocused() && increment());
+whenever(keys.ArrowDown, () => !isInputFocused() && decrement());
 </script>
